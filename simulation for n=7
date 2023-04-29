@@ -1,0 +1,31 @@
+library(combinat) 
+all7=permn(7)
+allmat=NULL
+for (i in 1:fact(7))
+{
+	allmat[[i]]=ndice(vec=all7[[i]],n=7)
+}
+fullcycle.counter7=function(k,m)
+{
+	a=permn(m)
+	vec=rep(0,times=fact(m))
+	for (i in 1:fact(m))
+	{
+		temp=rep(0,times=m)
+		for (j in 1:m)
+		{
+			if (j==m)
+			temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][1],])
+                  else temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][j+1],])
+		}
+			 	if (length(unique(temp))==1)
+		vec[i]=1
+	}
+	return(sum(vec))
+}
+rand.num=sample(1:5040, 10, replace=F)
+for (i in rand.num) 
+{ 
+	cat("\nNumber of complete cycle in",i,"th set of 7 dice: ",fullcycle.counter7(k=i,m=7)) 
+} 
+print("Yes, there exist atleast one complete cycle for n=7, since 238>1")
