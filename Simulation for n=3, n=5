@@ -1,0 +1,69 @@
+library(combinat) 
+all3=permn(3)
+allmat=NULL
+for (i in 1:fact(3))
+{
+	allmat[[i]]=ndice(vec=all3[[i]],n=3)
+}
+fullcycle.counter3=function(k,m)
+{
+	a=permn(m)
+	vec=rep(0,times=fact(m))
+	for (i in 1:fact(m))
+	{
+		temp=rep(0,times=m)
+		for (j in 1:m)
+		{
+			if (j==m)
+			temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][1],])
+                  else temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][j+1],])
+		}
+			 	if (length(unique(temp))==1)
+		vec[i]=1
+	}
+	return(sum(vec))
+}
+vec1=NULL
+for (i in 1:fact(3))
+{
+	if (fullcycle.counter3(k=i,m=3)>=1)
+	vec1[i]="TRUE"
+}
+	if (length(unique(vec1)==1))
+cat("The number of complete cycle in each set of 3 dice: ",length(vec1))
+print("Yes, there exist atleast one complete cycle for n=3, since 6>1")
+
+library(combinat) 
+all5=permn(5)
+allmat=NULL
+for (i in 1:fact(5))
+{
+	allmat[[i]]=ndice(vec=all5[[i]],n=5)
+}
+fullcycle.counter5=function(k,m)
+{
+	a=permn(m)
+	vec=rep(0,times=fact(m))
+	for (i in 1:fact(m))
+	{
+		temp=rep(0,times=m)
+		for (j in 1:m)
+		{
+			if (j==m)
+			temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][1],])
+                  else temp[j]=beats(allmat[[k]][a[[i]][j],],allmat[[k]][a[[i]][j+1],])
+		}
+			 	if (length(unique(temp))==1)
+		vec[i]=1
+	}
+	return(sum(vec))
+}
+vec1=rep(0,times=120)
+for (i in 1:fact(5))
+{
+	if (fullcycle.counter5(k=i,m=5)>=1)
+	vec1[i]="TRUE"
+}
+	if (length(unique(vec1)==1))
+cat("The number of complete cycle in each set of 5 dice: ",fullcycle.counter5(k=1,m=5))
+print("Yes, there exist atleast one complete cycle for n=5, since 20>1")
