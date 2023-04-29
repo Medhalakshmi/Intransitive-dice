@@ -1,0 +1,8 @@
+beats=function(x,y) 
+{     
+	n=length(x)     
+	tot=0     
+	for(i in 1:n)         
+		tot=tot+sum(x[i]>y)     
+	return(tot>(n*n)/2) 
+}
