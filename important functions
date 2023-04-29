@@ -1,0 +1,24 @@
+beats=function(x,y) 
+{     
+	n=length(x)     
+	tot=0     
+	for(i in 1:n)         
+		tot=tot+sum(x[i]>y)     
+	return(tot>(n*n)/2) 
+}
+ndice=function(vec,n) 
+{ 
+	A=matrix(1:n^2,nrow=n,byrow=T)
+	x=NULL 
+	M=matrix(,nrow=n,ncol=n) 
+	for(i in 1:n) 
+	{
+		p=c(vec[-c(1:i)],vec[c(1:i)]) 	
+		for(j in 1:n) 	
+		{ 			
+			x[j]=A[j,p[j]] 	
+		} 	
+		M[i,]=x 
+	} 
+	return (M) 
+}
